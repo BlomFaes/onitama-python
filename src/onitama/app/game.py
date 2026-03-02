@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from typing import Callable
-
 from onitama.domain.models import Card, GameState, Piece, PieceKind, Player
 from onitama.domain.rules import apply_move, winner
 
 def initial_state(cards_for_game: list[Card]) -> GameState:
-
     if len(cards_for_game) != 5:
         raise ValueError("Need exactly 5 cards (2 red, 2 blue, 1 neutral).")
 
@@ -21,7 +18,6 @@ def initial_state(cards_for_game: list[Card]) -> GameState:
         (4, 2): Piece(Player.RED, PieceKind.MASTER),
         (4, 3): Piece(Player.RED, PieceKind.STUDENT),
         (4, 4): Piece(Player.RED, PieceKind.STUDENT),
-
         # BLUE (row 0)
         (0, 0): Piece(Player.BLUE, PieceKind.STUDENT),
         (0, 1): Piece(Player.BLUE, PieceKind.STUDENT),
@@ -42,18 +38,12 @@ def play_game(
     red_controller,
     blue_controller,
     max_plies: int = 200,
-    verbose: bool = False,
-    render_fn: Callable[[GameState], str] | None = None,
 ) -> GameState:
 
     for _ in range(max_plies):
         w = winner(state)
         if w is not None:
             return state
-
-        if verbose and render_fn is not None:
-            print(render_fn(state))
-            print("")
 
         controller = red_controller if state.to_move is Player.RED else blue_controller
         move = controller.select_move(state)
