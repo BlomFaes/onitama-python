@@ -12,14 +12,14 @@ class PlayerController(Protocol):
         raise NotImplementedError()
 
 @dataclass
-class HumanPlayer:
+class HumanPlayer(PlayerController):
     chooser: Callable[[GameState], Move]
 
     def select_move(self, state: GameState) -> Move:
         return self.chooser(state)
 
 @dataclass
-class RandomPlayer:
+class RandomPlayer(PlayerController):
     seed: int | None = None
 
     def __post_init__(self) -> None:
@@ -32,7 +32,7 @@ class RandomPlayer:
         return self._rng.choice(moves)
 
 @dataclass
-class MinimaxPlayer:
+class MinimaxPlayer(PlayerController):
     player: Player
     depth: int = 2
 

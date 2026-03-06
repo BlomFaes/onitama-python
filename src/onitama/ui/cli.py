@@ -3,7 +3,7 @@ from __future__ import annotations
 from onitama.domain.models import GameState, Move, PieceKind, Player
 from onitama.domain.rules import generate_legal_moves
 
-def _piece_char(state: GameState, r: int, c: int) -> str:
+def piece_char(state: GameState, r: int, c: int) -> str:
     p = state.board.get((r, c))
     if p is None:
         return "."
@@ -17,7 +17,7 @@ def render(state: GameState) -> str:
 
     board_lines: list[str] = []
     for r in range(5):
-        row_text = " ".join(_piece_char(state, r, c) for c in range(5))
+        row_text = " ".join(piece_char(state, r, c) for c in range(5))
         board_lines.append(f"{r}  {row_text}")
 
     left_header = "   0 1 2 3 4"

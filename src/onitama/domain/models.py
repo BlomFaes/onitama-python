@@ -4,8 +4,6 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import FrozenSet, Tuple
 
-BOARD_SIZE = 5
-
 Square = Tuple[int, int]
 
 Offset = Tuple[int, int]

@@ -106,17 +106,17 @@ def minimax_alpha_beta(
             if beta <= alpha:
                 break  # prune
         return SearchResult(score=best_score, best_move=best_move)
-    else:
-        best_score = 10 ** 9
-        for mv in legal_moves:
-            child = apply_move(state, mv)
-            result = minimax_alpha_beta(child, depth - 1, alpha, beta, perspective)
-            if result.score < best_score:
-                best_score = result.score
-                best_move = mv
-            beta = min(beta, best_score)
-            if beta <= alpha:
-                break  # prune
-        return SearchResult(score=best_score, best_move=best_move)
+
+    best_score = 10 ** 9
+    for mv in legal_moves:
+        child = apply_move(state, mv)
+        result = minimax_alpha_beta(child, depth - 1, alpha, beta, perspective)
+        if result.score < best_score:
+            best_score = result.score
+            best_move = mv
+        beta = min(beta, best_score)
+        if beta <= alpha:
+            break  # prune
+    return SearchResult(score=best_score, best_move=best_move)
 
 

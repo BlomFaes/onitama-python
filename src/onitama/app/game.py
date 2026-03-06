@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from onitama.app.players import PlayerController
 from onitama.domain.models import Card, GameState, Piece, PieceKind, Player
 from onitama.domain.rules import apply_move, winner
 
@@ -35,8 +36,8 @@ def initial_state(cards_for_game: list[Card]) -> GameState:
 
 def play_game(
     state: GameState,
-    red_controller,
-    blue_controller,
+    red_controller: PlayerController,
+    blue_controller: PlayerController,
     max_plies: int = 200,
 ) -> GameState:
 

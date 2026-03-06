@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from onitama.domain.models import BOARD_SIZE, Card, GameState, Move, Player, Square, PieceKind
+from onitama.domain.models import Card, GameState, Move, Player, Square, PieceKind
 
+BOARD_SIZE = 5
 
 def in_bounds(sq: Square) -> bool:
     # Returns true if the desired square is in bounds
