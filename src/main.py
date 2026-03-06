@@ -9,9 +9,9 @@ from onitama.ui.cli import choose_human_move, render
 def main() -> None:
     # Manual deal
     # cards_for_game = cards.setup_cards(
-    #     red=("Ox", "Goose"),
-    #     blue=("Elephant", "Eel"),
-    #     neutral="Horse",
+    #     red=("Frog", "Eel"),
+    #     blue=("Horse", "Rooster"),
+    #     neutral="Tiger",
     # )
 
     # Random deal
@@ -20,7 +20,7 @@ def main() -> None:
     state = initial_state(cards_for_game)
 
     red = HumanPlayer(choose_human_move)
-    blue = MinimaxPlayer(player=Player.BLUE, depth=1)
+    blue = MinimaxPlayer(player=Player.BLUE, depth=5)
 
     final_state = play_game(state, red, blue)
     print(render(final_state))
