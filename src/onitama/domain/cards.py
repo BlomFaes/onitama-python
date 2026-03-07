@@ -5,10 +5,7 @@ from typing import Sequence
 
 from onitama.domain.models import Card
 
-
-def all_cards() -> list[Card]:
-
-    return [
+ALL_CARDS = [
         Card("Tiger", frozenset({(-2, 0), (1, 0)})),
         Card("Dragon", frozenset({(-1, -2), (-1, 2), (1, -1), (1, 1)})),
         Card("Frog", frozenset({(0, -2), (-1, -1), (1, 1)})),
@@ -27,10 +24,9 @@ def all_cards() -> list[Card]:
         Card("Cobra", frozenset({(-1, 1), (1, 1), (0, -1)})),
     ]
 
-
 def deal_five(seed: int | None = None, cards: Sequence[Card] | None = None) -> list[Card]:
 
-    pool = list(cards) if cards is not None else all_cards()
+    pool = list(cards) if cards is not None else ALL_CARDS
     if len(pool) < 5:
         raise ValueError("Need at least 5 cards to deal a game.")
 
@@ -46,13 +42,13 @@ def setup_cards(*, red: tuple[str, str], blue: tuple[str, str], neutral: str) ->
 
 def get_cards_by_names(names: Sequence[str]) -> list[Card]:
 
-    name_to_card = {c.name.lower(): c for c in all_cards()}
+    name_to_card = {c.name.lower(): c for c in ALL_CARDS}
 
     chosen: list[Card] = []
     for name in names:
         key = name.strip().lower()
         if key not in name_to_card:
-            valid = ", ".join(sorted(c.name for c in all_cards()))
+            valid = ", ".join(sorted(c.name for c in ALL_CARDS))
             raise ValueError(f"Unknown card name '{name}'. Valid names: {valid}")
         chosen.append(name_to_card[key])
 
