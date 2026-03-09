@@ -164,10 +164,6 @@ blue = MinimaxPlayer(player=Player.BLUE, depth=5)  # Change depth value
 
 ## Development
 
-### Project Status
-
-This project is actively under development and serves as an implementation study of the Onitama board game with an AI opponent.
-
 ### Contributing
 
 Contributions are welcome! Feel free to:
@@ -177,25 +173,9 @@ Contributions are welcome! Feel free to:
 - Add new UI implementations
 - Improve documentation
 
-### Potential Enhancements
-
-- Graphical user interface (GUI)
-- Network multiplayer support
-- Game state persistence
-- Opening/endgame analysis
-- Stronger AI with transposition tables
-- Unit test suite
-- Performance profiling and optimization
-
 ## About Onitama
 
 Onitama is an elegant two-player abstract strategy game published by Arcane Wonders. Players command warriors using martial arts cards, balancing hand management with spatial tactics. The game is known for its depth despite simple rules and quick playtime.
-
-For more information about the physical game, visit the [official Arcane Wonders website](https://www.arcanewonders.com/onitama/).
-
-## License
-
-[Add your license here - e.g., MIT, GPL, etc.]
 
 ## Author
 
