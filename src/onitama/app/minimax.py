@@ -88,6 +88,8 @@ def minimax_alpha_beta(
         return SearchResult(score=evaluate(state, perspective), best_move=None)
 
     legal_moves = generate_legal_moves(state)
+    # Later addition maybe? sort the moves based on whether there is a capture to speed up the algorithm?
+    # legal_moves.sort(key=lambda m: is_capture(state, m), reverse=True)
     if not legal_moves:
         return SearchResult(score=evaluate(state, perspective), best_move=None)
 

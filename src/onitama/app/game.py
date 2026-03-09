@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from onitama.app.players import PlayerController
+from onitama.app.players.protocol import PlayerController
 from onitama.domain.models import Card, GameState, Piece, PieceKind, Player
 from onitama.domain.rules import apply_move, winner
 

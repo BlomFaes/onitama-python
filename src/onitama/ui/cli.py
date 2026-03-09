@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from onitama.domain.models import GameState, Move, PieceKind, Player
 from onitama.domain.rules import generate_legal_moves
+
+from .protocol import UIHandler
+
 
 def piece_char(state: GameState, r: int, c: int) -> str:
     p = state.board.get((r, c))
@@ -10,6 +15,7 @@ def piece_char(state: GameState, r: int, c: int) -> str:
     if p.owner is Player.RED:
         return "R" if p.kind is PieceKind.MASTER else "r"
     return "B" if p.kind is PieceKind.MASTER else "b"
+
 
 def render(state: GameState) -> str:
     blue_cards = " | ".join(c.name for c in state.hand[Player.BLUE])
@@ -22,8 +28,6 @@ def render(state: GameState) -> str:
 
     left_header = "   0 1 2 3 4"
 
-    # We'll place the neutral card text on the right side of the board,
-    # roughly centered vertically.
     right_column = [""] * 5
     right_column[2] = f"NEUTRAL: {state.neutral.name}"
 
@@ -42,31 +46,39 @@ def render(state: GameState) -> str:
 
     return "\n".join(lines)
 
-def choose_human_move(state: GameState) -> Move:
-    legal = generate_legal_moves(state)
 
-    print(render(state))
-    print("")
-    print("Choose a move by number:")
+@dataclass
+class CliUI(UIHandler):
 
-    for i, mv in enumerate(legal, start=1):
-        moving_piece = state.board[mv.from_sq]
-        piece_label = "MASTER" if moving_piece.kind is PieceKind.MASTER else "STUDENT"
+    def show_state(self, state: GameState) -> None:
+        print(render(state))
 
-        fr, fc = mv.from_sq
-        tr, tc = mv.to_sq
-        print(f"{i:2d}. {piece_label:7s} ({fr},{fc}) -> ({tr},{tc}) using {mv.card_name}")
+    def choose_move(self, state: GameState) -> Move:
+        self.show_state(state)
+        legal = generate_legal_moves(state)
 
-    while True:
-        raw = input("> ").strip()
-        if not raw.isdigit():
-            print("Please enter a number.")
-            continue
+        print("\nChoose a move by number:\n")
 
-        idx = int(raw)
-        if 1 <= idx <= len(legal):
-            return legal[idx - 1]
+        for i, mv in enumerate(legal, start=1):
+            moving_piece = state.board[mv.from_sq]
+            piece_label = "MASTER" if moving_piece.kind is PieceKind.MASTER else "STUDENT"
 
-        print(f"Please enter a number between 1 and {len(legal)}.")
+            fr, fc = mv.from_sq
+            tr, tc = mv.to_sq
+            print(f"{i:2d}. {piece_label:7s} ({fr},{fc}) -> ({tr},{tc}) using {mv.card_name}")
 
-    raise AssertionError("Unreachable: loop should return a Move once input is valid.")
+        while True:
+            raw = input("> ").strip()
+
+            if not raw.isdigit():
+                print("Please enter a number.")
+                continue
+
+            idx = int(raw)
+
+            if 1 <= idx <= len(legal):
+                return legal[idx - 1]
+
+            print(f"Please enter a number between 1 and {len(legal)}.")
+
+        raise AssertionError("Unreachable: valid input must return a Move.")
