@@ -10,10 +10,10 @@ class RandomPlayer(PlayerController):
     seed: int | None = None
 
     def __post_init__(self) -> None:
-        self._rng = random.Random(self.seed)
+        self.rng = random.Random(self.seed)
 
     def select_move(self, state: GameState) -> Move:
         moves = generate_legal_moves(state)
         if not moves:
             raise RuntimeError("No legal moves")
-        return self._rng.choice(moves)
+        return self.rng.choice(moves)
