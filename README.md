@@ -110,27 +110,6 @@ The AI uses **Minimax with Alpha-Beta Pruning** for efficient game tree search:
 - **Search Depth**: Configurable (default: 5 plies)
 - **Optimizations**: Alpha-beta pruning to reduce search space
 
-## Available Cards
-
-The game includes 16 different martial arts cards, each with unique movement patterns:
-
-- **Tiger**: Jump backwards 2, step forward 1
-- **Dragon**: Powerful diagonal jumps
-- **Frog**: Horizontal leap backwards, diagonal forward
-- **Rabbit**: Horizontal leap forward, diagonal backward
-- **Crab**: Horizontal control with center step
-- **Elephant**: Defensive corner coverage
-- **Goose**: Side control with alternating diagonals
-- **Rooster**: Alternating diagonal and side control
-- **Monkey**: Four-square diagonal jumps
-- **Mantis**: Aggressive forward diagonals
-- **Horse**: Forward focus with side steps
-- **Ox**: Forward and backward control
-- **Crane**: Backward with diagonal forward
-- **Boar**: Forward and backward side control
-- **Eel**: Lateral movement with forward diagonal
-- **Cobra**: Lateral movement with backward diagonal
-
 ## Customization
 
 ### Manual Card Selection
